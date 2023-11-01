@@ -9,11 +9,27 @@ def random(seed: float = 0.1, count: int = 1):
         yield float(x0)
 
 
+def random_range(seed: float = 0.1, a: float = 0, b: float = 1, count: int = 1):
+    try:
+        for num in random(seed, count):
+            yield a + (b - a) * num
+    except StopIteration:
+        pass
+
+
 x0 = float(input('> '))
 count = int(input('> '))
 generator = random(x0)
 try:
     for i, num in enumerate(random(x0, count)):
+        print(f'{i+1}: {num}')
+except StopIteration:
+    pass
+
+a, b = map(float, input('> ').split())
+count = int(input('> '))
+try:
+    for i, num in enumerate(random_range(x0, a, b, count)):
         print(f'{i+1}: {num}')
 except StopIteration:
     pass
